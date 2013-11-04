@@ -12,10 +12,10 @@ class SauceTestResult(TextTestResult):
         self.sauce_stream = sauce_stream
 
     def log(self, test, outcome):
-        if not hasattr(test, "test") or not hasattr(test.test, "sessionId"):
-            return
+        #if not hasattr(test, "test") or not hasattr(test.test, "sessionId"):
+        #    return
         description = self.getDescription(test)
-        sessionId = test.sessionId
+        sessionId = test.test.sessionId
         self.sauce_stream.write("|".join((description, sessionId, outcome))+"\n")
         self.sauce_stream.flush()
 
