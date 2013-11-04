@@ -1,8 +1,8 @@
 import urllib2
 import StringIO
 
-SAUCEURL = "https://saucelabs.com/rest/%(u)s/jobs/%(j)s/results/%(r)s"
-SAUCEURL_WITHAUTH = "https://%(u)s:%(p)s@saucelabs.com/rest/%(u)s/jobs/%(j)s/results/%(r)s"
+SAUCEURL = "https://saucelabs.com/rest/%(u)s/jobs/%(j)s/assets/%(r)s"
+SAUCEURL_WITHAUTH = "https://%(u)s:%(p)s@saucelabs.com/rest/%(u)s/jobs/%(j)s/assets/%(r)s"
  
 class LogParser(object):
 

@@ -12,10 +12,10 @@ class SauceTestResult(TextTestResult):
         self.sauce_stream = sauce_stream
 
     def log(self, test, outcome):
-        #if not hasattr(test, "test") or not hasattr(test.test, "sessionId"):
-        #    return
+        if not hasattr(test, "test") or not hasattr(test.test, "sessionId"):
+            return
         description = self.getDescription(test)
-        sessionId = test.test.sessionId
+        sessionId = test.sessionId
         self.sauce_stream.write("|".join((description, sessionId, outcome))+"\n")
         self.sauce_stream.flush()
 
@@ -63,27 +63,26 @@ def run_foo(self, result = None):
         except KeyboardInterrupt:
             raise
         except:
-            result.addError(self, self._exc_info())
+            result.addError(self, sys.exc_info())
             return
 
         ok = False
         try:
-            self.sessionId = self.selenium.sessionId
             testMethod()
             ok = True
         except self.failureException:
-            result.addFailure(self, self._exc_info())
+            result.addFailure(self, sys.exc_info())
         except KeyboardInterrupt:
             raise
         except:
-            result.addError(self, self._exc_info())
+            result.addError(self, sys.exc_info())
 
         try:
             self.tearDown()
         except KeyboardInterrupt:
             raise
         except:
-            result.addError(self, self._exc_info())
+            result.addError(self, sys.exc_info())
             ok = False
         if ok: result.addSuccess(self)
     finally:
